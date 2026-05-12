@@ -747,9 +747,15 @@ class Asset():
         
         if sampled_vertices is not None and vertices is not None and sampled_skin is not None:
             tree = cKDTree(sampled_vertices)
-            distances, indices = tree.query(vertices)
-            _s = sampled_skin[indices]
-            skin = _s
+            k = min(8, sampled_vertices.shape[0])
+            distances, indices = tree.query(vertices, k=k)
+            if k == 1:
+                skin = sampled_skin[indices]
+            else:
+                # smooth interpolation with inverse-distance weights
+                weights = 1.0 / (distances + 1e-8)
+                weights = weights / np.sum(weights, axis=1, keepdims=True)
+                skin = np.einsum("nk,nkj->nj", weights, sampled_skin[indices])
         asset = Asset(
             vertices=vertices,
             faces=faces,
