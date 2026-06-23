@@ -1,34 +1,39 @@
-<h1 align="center">SkinTokens — Blender Auto-Rig</h1>
+<h1 align="center">SkinTokens Blender Add-on</h1>
 
-<p align="center"><em>One-click skeleton + skin-weight rigging inside Blender — runs locally on your own NVIDIA GPU, so your assets never leave your machine.</em></p>
+<p align="center"><em>Generate skeletons and skin weights directly inside Blender — running locally on your own NVIDIA GPU, so your assets never leave your machine.</em></p>
 
 <p align="center">
   <img src="assets/skintokens-teaser.png" width="100%" alt="SkinTokens automated rigging in Blender"/>
 </p>
 
-> A fork of [VAST-AI-Research/SkinTokens](https://github.com/VAST-AI-Research/SkinTokens) that adds a local **Blender add-on**. New here? Start with the Quick Start below — the original research paper and links are in the **About SkinTokens** section further down.
+> A fork of [VAST-AI-Research/SkinTokens](https://github.com/VAST-AI-Research/SkinTokens) that adds a local Blender add-on. The original research paper and links are in the **About SkinTokens** section below.
 
-## 🚀 Quick Start — Blender Auto-Rig (Windows)
+## 🚀 Quick Start
 
-Auto-rig a mesh inside Blender: select a model, click one button, and get back a skeleton with skin weights. The model runs **locally on your own NVIDIA GPU**, so your assets never leave your machine.
-
-**Requirements:** Windows 10/11 · NVIDIA GPU with **≥ 14 GB VRAM** · Blender **3.6–5.1**. (Full list in the [usage guide](blender_addon/USAGE_GUIDE.md).)
-
-**First time — set up once:**
-
-1. Download this repo (green **Code** button → **Download ZIP**) and unzip it.
-2. Install the environment and download the model (from the project folder):
+1. **Set up once** — run the installer (creates the env + downloads the model):
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\setup_windows.ps1
    ```
+2. **Start the backend** — double-click **`run_addon_server.bat`** and wait for `... backend is ready` (leave it open).
+3. **Install the add-on** — in Blender: Edit → Preferences → Add-ons → Install from Disk → pick **`blender_addon.zip`** → enable **SkinTokens Auto-Rig**.
+4. **Select a mesh** in the viewport.
+5. **Click Generate Rig** in the **SkinTokens** panel (press `N` for the sidebar).
 
-**Every time you use it:**
+Full guide, supported versions, and troubleshooting → **[blender_addon/USAGE_GUIDE.md](blender_addon/USAGE_GUIDE.md)**.
 
-3. Double-click **`run_addon_server.bat`** and wait for `... backend is ready`. Leave this window open.
-4. In Blender: Edit → Preferences → Add-ons → **Install from Disk** → pick **`blender_addon.zip`** → enable **SkinTokens Auto-Rig**. (Once per Blender version.)
-5. Select a mesh → **SkinTokens** tab in the N-panel → **Rig Selected Mesh**.
+## Requirements
 
-Multi-object characters are auto-joined, and the glTF importer's leftover nodes are cleaned up automatically. Full guide, supported versions, and troubleshooting: **[blender_addon/USAGE_GUIDE.md](blender_addon/USAGE_GUIDE.md)**.
+- Windows 10/11
+- NVIDIA GPU with **14 GB+ VRAM** (CUDA)
+- Blender **3.6+** (tested on 4.2 / 4.4 / 5.0 / 5.1)
+
+## Features
+
+- **One-click rig generation** — skeleton + per-vertex skin weights
+- **Runs locally** on your own GPU — private, offline, no uploads
+- **Multi-object characters auto-joined** (your originals are kept)
+- **Automatic scene cleanup** — removes the glTF importer's leftover nodes
+- **Live server status** + **Check Environment** button in the panel
 
 ---
 

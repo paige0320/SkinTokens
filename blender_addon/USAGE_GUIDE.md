@@ -61,7 +61,7 @@ alone cannot rig anything.
    `blender_addon.zip` → tick **"SkinTokens Auto-Rig"**. Leave its preferences
    blank — it auto-detects the running backend.
 4. **Rig:** select your mesh in the viewport (selection outline visible) →
-   open the **SkinTokens** tab in the N-panel → click **Rig Selected Mesh**.
+   open the **SkinTokens** tab in the N-panel → click **Generate Rig**.
 
 ## 4. What success looks like
 
@@ -105,7 +105,7 @@ alone cannot rig anything.
 ## 7. How to check the add-on version
 
 - **In the file**: `blender_addon/__init__.py` → `bl_info["version"]`
-  (currently **1.1.0**).
+  (currently **1.2.0**).
 - **In Blender**: Preferences → Add-ons → expand "SkinTokens Auto-Rig".
 
 ## 8. Security

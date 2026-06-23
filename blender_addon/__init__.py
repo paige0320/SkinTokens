@@ -34,7 +34,7 @@ from bpy.types import AddonPreferences, Operator, Panel, PropertyGroup
 bl_info = {
     "name": "SkinTokens Auto-Rig",
     "author": "SkinTokens (local fork)",
-    "version": (1, 1, 0),
+    "version": (1, 2, 0),
     "blender": (3, 6, 0),
     "location": "View3D > Sidebar > SkinTokens",
     "description": "Auto-rig the selected mesh via a local SkinTokens backend",
@@ -269,7 +269,7 @@ def _run_check(url: str):
 # --------------------------------------------------------------------------- #
 class SKINTOKENS_OT_rig(Operator):
     bl_idname = "skintokens.rig_selected"
-    bl_label = "Rig Selected Mesh"
+    bl_label = "Generate Rig"
     bl_description = "Send the selected mesh to the SkinTokens backend and import the rigged result"
     bl_options = {"REGISTER", "UNDO"}
 

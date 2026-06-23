@@ -15,7 +15,7 @@ Blender (add-on)  --HTTP 127.0.0.1 + token-->  addon_server.py  -->  TokenRig (G
 1. Set up the environment once: run **`../setup_windows.ps1`** (see `../WINDOWS_SETUP.md`).
 2. Start the backend: double-click **`../run_addon_server.bat`** and wait for `... backend is ready` (leave it open).
 3. Install this add-on in Blender: Edit → Preferences → Add-ons → **Install from Disk** → pick `blender_addon.zip` → enable **SkinTokens Auto-Rig**.
-4. Select a mesh → **SkinTokens** tab in the N-panel → **Rig Selected Mesh**.
+4. Select a mesh → **SkinTokens** tab in the N-panel → **Generate Rig**.
 
 ## Full documentation
 
