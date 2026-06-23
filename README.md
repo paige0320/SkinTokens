@@ -10,14 +10,21 @@
 
 ## 🚀 Quick Start
 
-1. **Set up once** — run the installer (creates the env + downloads the model):
+**Prerequisites:** Windows 10/11 · an **NVIDIA GPU (14 GB+ VRAM)** · **Python 3.11+** already installed (Anaconda is fine) · Blender 3.6+.
+
+**First-time setup (once):**
+
+1. Download this repo (**Code → Download ZIP**, or grab a [release](../../releases)) and unzip it.
+2. Open **PowerShell in that folder** and run the installer — it creates the environment and downloads the model (takes a few minutes):
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\setup_windows.ps1
    ```
-2. **Start the backend** — double-click **`run_addon_server.bat`** and wait for `... backend is ready` (leave it open).
-3. **Install the add-on** — in Blender: Edit → Preferences → Add-ons → Install from Disk → pick **`blender_addon.zip`** → enable **SkinTokens Auto-Rig**.
-4. **Select a mesh** in the viewport.
-5. **Click Generate Rig** in the **SkinTokens** panel (press `N` for the sidebar).
+3. In Blender: Edit → Preferences → Add-ons → **Install from Disk** → pick **`blender_addon.zip`** → enable **SkinTokens Auto-Rig**.
+
+**Each time you use it:**
+
+4. Double-click **`run_addon_server.bat`** — the first run loads the model (~1 min); wait for `... backend is ready` and leave the window open.
+5. Select a mesh → open the **SkinTokens** panel (press `N`) → click **Generate Rig**.
 
 Full guide, supported versions, and troubleshooting → **[blender_addon/USAGE_GUIDE.md](blender_addon/USAGE_GUIDE.md)**.
 
@@ -25,6 +32,7 @@ Full guide, supported versions, and troubleshooting → **[blender_addon/USAGE_G
 
 - Windows 10/11
 - NVIDIA GPU with **14 GB+ VRAM** (CUDA)
+- **Python 3.11+** already installed (Anaconda `base` is fine — used to bootstrap the installer)
 - Blender **3.6+** (tested on 4.2 / 4.4 / 5.0 / 5.1)
 
 ## Features
