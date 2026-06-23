@@ -128,6 +128,9 @@ def post_bpy_payload(endpoint: str, payload):
         response = requests.post(
             f"{BPY_SERVER}/{endpoint}",
             data=object_to_bytes(request_payload),
+            # bpy_server is local; never route this through a system/corporate
+            # proxy (Squid etc.), which would reset the connection.
+            proxies={"http": None, "https": None},
         )
         response.raise_for_status()
         result = bytes_to_object(response.content)
@@ -415,7 +418,7 @@ def wait_for_bpy_server(timeout=30):
     t0 = time.time()
     while True:
         try:
-            requests.get(f"{BPY_SERVER}/ping", timeout=1)
+            requests.get(f"{BPY_SERVER}/ping", timeout=1, proxies={"http": None, "https": None})
             print("[Main] bpy_server is ready")
             return
         except Exception:

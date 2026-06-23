@@ -39,7 +39,13 @@ class BpyServerLazyAsset(LazyAsset):
     """workaround while bpy is working in multiple threads"""
     def load(self) -> 'Asset':
         try:
-            asset = bytes_to_object(requests.get(f"{BPY_SERVER}/load", data=object_to_bytes(self.path)).content)
+            # bpy_server is local; bypass any system/corporate proxy (Squid etc.)
+            # so the request isn't hijacked into an HTML error page.
+            asset = bytes_to_object(requests.get(
+                f"{BPY_SERVER}/load",
+                data=object_to_bytes(self.path),
+                proxies={"http": None, "https": None},
+            ).content)
             if isinstance(asset, str):
                 raise RuntimeError(f"bpy server failed: {asset}")
             assert isinstance(asset, Asset)

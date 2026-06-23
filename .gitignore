@@ -102,3 +102,11 @@ coverage.xml
 # Personal local setup/debug log (contains internal network details) — keep local only
 專案上手筆記.md
 gradio.log
+# Auto-generated auth token for the Blender add-on backend — must stay private
+.addon_token
+# Personal Chinese guide (English USAGE_GUIDE.md is the one meant for sharing)
+操作說明_中文.md
+# Dev-only QA scripts for the Blender add-on (end users don't need them)
+test_addon_blender.py
+test_addon_multiobj.py
+make_multiobj_test.py
