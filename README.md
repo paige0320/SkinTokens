@@ -14,7 +14,7 @@
 
 **First-time setup (once):**
 
-1. Download this repo (**Code → Download ZIP**, or grab a [release](../../releases)) and unzip it.
+1. Download this repo — green **Code → Download ZIP** — and unzip it.
 2. Open **PowerShell in that folder** and run the installer — it creates the environment and downloads the model (takes a few minutes):
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\setup_windows.ps1
@@ -42,6 +42,14 @@ Full guide, supported versions, and troubleshooting → **[blender_addon/USAGE_G
 - **Multi-object characters auto-joined** (your originals are kept)
 - **Automatic scene cleanup** — removes the glTF importer's leftover nodes
 - **Live server status** + **Check Environment** button in the panel
+
+## What's included
+
+- **Blender add-on** (`blender_addon.zip`) — exports the selection, auto-joins multi-object characters, imports the rigged result, and removes the importer's leftover `Icosphere` / `glTF_not_exported` nodes.
+- **Local backend** (`addon_server.py`) — keeps the model resident in VRAM; binds to **`127.0.0.1` only** and is **token-protected**, so nothing is exposed on your network.
+- **One-click scripts** — `setup_windows.ps1` (install + model download) and `run_addon_server.bat` (launch).
+
+> Model checkpoints are **not** stored in the repo — `setup_windows.ps1` downloads them for you (~1.5 GB).
 
 ---
 
