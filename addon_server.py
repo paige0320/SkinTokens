@@ -192,7 +192,36 @@ def _port_in_use(host: str, port: int) -> bool:
         return s.connect_ex((probe_host, port)) == 0
 
 
+def _disable_console_quick_edit():
+    """Turn off the Windows console "QuickEdit Mode".
+
+    With QuickEdit on, clicking anywhere in the server window puts it into
+    select mode and *freezes the whole process* until you press Enter/Esc -- the
+    backend then looks hung and the add-on shows Offline. Disabling it means the
+    window can be clicked without pausing the server.
+    """
+    if os.name != "nt":
+        return
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        kernel32 = ctypes.windll.kernel32
+        STD_INPUT_HANDLE = -10
+        ENABLE_EXTENDED_FLAGS = 0x0080
+        ENABLE_QUICK_EDIT_MODE = 0x0040
+        handle = kernel32.GetStdHandle(STD_INPUT_HANDLE)
+        mode = wintypes.DWORD()
+        if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+            new_mode = (mode.value & ~ENABLE_QUICK_EDIT_MODE) | ENABLE_EXTENDED_FLAGS
+            kernel32.SetConsoleMode(handle, new_mode)
+    except Exception:
+        pass
+
+
 def main():
+    _disable_console_quick_edit()
+
     # Refuse to start a second backend on the same port -- running duplicates
     # leaves a broken one (no bpy_server child) that the add-on may hit.
     if _port_in_use(HOST, PORT):
