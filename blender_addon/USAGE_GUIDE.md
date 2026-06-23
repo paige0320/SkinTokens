@@ -71,6 +71,13 @@ alone cannot rig anything.
 
 ## 5. Behaviour notes
 
+- **Server status indicator.** The top of the panel shows a live
+  **Server: Connected 🟢 / Offline 🔴** indicator. It is refreshed by a
+  background poll of the backend's `/ping`, so it never freezes Blender.
+- **Check Environment button.** Click it to verify the backend's Python,
+  PyTorch, CUDA, GPU (with VRAM), checkpoint files, and whether the model is
+  loaded. Results are listed right in the panel (green = OK, red = problem) — no
+  need to read the console. The check runs off the main thread.
 - **Multiple selected objects are auto-joined.** If you select several parts
   (e.g. body + head + arms), the add-on joins a *throwaway duplicate* and rigs
   that, so the result is one skinned mesh + armature. **Your original objects

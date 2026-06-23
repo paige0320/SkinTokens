@@ -96,6 +96,37 @@ def build_app() -> bottle.Bottle:
         # No auth: lets the add-on check connectivity without leaking anything.
         return "ok"
 
+    @app.route("/health", method="GET")
+    def health():
+        # No auth (loopback-only, non-sensitive): reports the environment so the
+        # Blender add-on's "Check Environment" button can show it in the UI.
+        import platform
+
+        import torch
+
+        import demo  # module global `model` tells us if the model is resident
+
+        cuda = bool(torch.cuda.is_available())
+        ckpt = MODEL_CKPTS[0] if MODEL_CKPTS else ""
+        info = {
+            "ok": True,
+            "python": platform.python_version(),
+            "torch": torch.__version__,
+            "cuda_available": cuda,
+            "cuda_version": torch.version.cuda,
+            "gpu": (torch.cuda.get_device_name(0) if cuda else None),
+            "vram_gb": (
+                round(torch.cuda.get_device_properties(0).total_memory / 1e9, 1)
+                if cuda
+                else None
+            ),
+            "checkpoint": ckpt,
+            "checkpoints_ok": bool(ckpt) and os.path.exists(ckpt),
+            "model_loaded": getattr(demo, "model", None) is not None,
+        }
+        response.content_type = "application/json"
+        return json.dumps(info)
+
     @app.route("/rig", method="POST")
     def rig():
         if not _authorized():
